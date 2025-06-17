@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Affelirt – KI Affiliate Video Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      color: #222;
+    }
+    input, button, textarea {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      max-width: 500px;
+    }
+    #preview {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎥 Affiliate Video Generator</h1>
+
+  <label>1️⃣ Lade ein Produktbild hoch:</label>
+  <input type="file" id="imageUpload" accept="image/*" />
+
+  <label>2️⃣ Füge deinen Affiliate-Link ein:</label>
+  <input type="text" id="affiliateLink" placeholder="https://..." />
+
+  <label>3️⃣ Deine Beschreibung oder Wünsche:</label>
+  <textarea id="videoDesc" placeholder="z. B. cool, virales Video für TikTok, mit Text: 'Top Shapewear'"></textarea>
+
+  <button onclick="generate()">🎬 Video generieren</button>
+
+  <div id="preview">
+    <p><strong>🔧 Hinweis:</strong> Hier wird später dein Video angezeigt.</p>
+    <img id="previewImage" style="max-width:300px; display:none;" />
+    <p id="videoPlaceholder" style="color:gray;"></p>
+  </div>
+
+  <script>
+    function generate() {
+      const file = document.getElementById('imageUpload').files[0];
+      const link = document.getElementById('affiliateLink').value;
+      const desc = document.getElementById('videoDesc').value;
+      const preview = document.getElementById('previewImage');
+      const placeholder = document.getElementById('videoPlaceholder');
+
+      if (!file || !link) {
+        alert("Bitte lade ein Bild hoch und füge deinen Affiliate-Link ein.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+        placeholder.innerText = "🔄 Dein Video wird erstellt... (Platzhalter)";
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
